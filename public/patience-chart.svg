@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="400" viewBox="0 0 600 400">
+  <rect width="600" height="400" fill="#f3f4f6"/>
+
+  <!-- Title -->
+  <text x="300" y="38" text-anchor="middle" font-family="Inter, sans-serif" font-weight="800" font-size="18" fill="#000" letter-spacing="-0.5">MY PATIENCE WITH DATING APPS</text>
+
+  <!-- Y-axis label -->
+  <text x="18" y="210" text-anchor="middle" font-family="monospace" font-size="11" fill="#9ca3af" transform="rotate(-90, 18, 210)">ENTHU</text>
+
+  <!-- Grid lines (horizontal) -->
+  <line x1="70" y1="70" x2="560" y2="70" stroke="#e5e7eb" stroke-width="1" stroke-dasharray="4,4"/>
+  <line x1="70" y1="140" x2="560" y2="140" stroke="#e5e7eb" stroke-width="1" stroke-dasharray="4,4"/>
+  <line x1="70" y1="210" x2="560" y2="210" stroke="#e5e7eb" stroke-width="1" stroke-dasharray="4,4"/>
+  <line x1="70" y1="280" x2="560" y2="280" stroke="#e5e7eb" stroke-width="1" stroke-dasharray="4,4"/>
+
+  <!-- Axes -->
+  <line x1="70" y1="60" x2="70" y2="350" stroke="#000" stroke-width="2"/>
+  <line x1="70" y1="350" x2="570" y2="350" stroke="#000" stroke-width="2"/>
+
+  <!-- Y-axis labels -->
+  <text x="60" y="75" text-anchor="end" font-family="monospace" font-size="10" fill="#6b7280">100%</text>
+  <text x="60" y="145" text-anchor="end" font-family="monospace" font-size="10" fill="#6b7280">75%</text>
+  <text x="60" y="215" text-anchor="end" font-family="monospace" font-size="10" fill="#6b7280">50%</text>
+  <text x="60" y="285" text-anchor="end" font-family="monospace" font-size="10" fill="#6b7280">25%</text>
+  <text x="60" y="355" text-anchor="end" font-family="monospace" font-size="10" fill="#6b7280">0%</text>
+
+  <!-- Area fill (gradient) -->
+  <defs>
+    <linearGradient id="redFade" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#dc2626" stop-opacity="0.25"/>
+      <stop offset="100%" stop-color="#dc2626" stop-opacity="0.03"/>
+    </linearGradient>
+  </defs>
+  <polygon points="90,80 160,95 230,130 300,190 370,260 440,310 510,338 550,345 550,350 90,350" fill="url(#redFade)"/>
+
+  <!-- The declining line -->
+  <polyline points="90,80 160,95 230,130 300,190 370,260 440,310 510,338 550,345"
+    fill="none" stroke="#dc2626" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Data points -->
+  <circle cx="90" cy="80" r="5" fill="#dc2626"/>
+  <circle cx="160" cy="95" r="4" fill="#dc2626"/>
+  <circle cx="230" cy="130" r="4" fill="#dc2626"/>
+  <circle cx="300" cy="190" r="4" fill="#dc2626"/>
+  <circle cx="370" cy="260" r="4" fill="#dc2626"/>
+  <circle cx="440" cy="310" r="4" fill="#dc2626"/>
+  <circle cx="510" cy="338" r="4" fill="#dc2626"/>
+  <circle cx="550" cy="345" r="5" fill="#dc2626"/>
+
+  <!-- X-axis labels -->
+  <text x="90" y="372" text-anchor="middle" font-family="monospace" font-size="10" fill="#6b7280">Day 1</text>
+  <text x="230" y="372" text-anchor="middle" font-family="monospace" font-size="10" fill="#6b7280">Week 1</text>
+  <text x="370" y="372" text-anchor="middle" font-family="monospace" font-size="10" fill="#6b7280">Month 1</text>
+  <text x="510" y="372" text-anchor="middle" font-family="monospace" font-size="10" fill="#6b7280">Month 3</text>
+
+  <!-- X-axis label -->
+  <text x="310" y="395" text-anchor="middle" font-family="monospace" font-size="11" fill="#9ca3af">TIME ON HINGE</text>
+
+  <!-- Fun annotation arrow -->
+  <defs>
+    <marker id="arrowRed" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto">
+      <path d="M0,0 L8,4 L0,8 Z" fill="#dc2626"/>
+    </marker>
+  </defs>
+</svg>
