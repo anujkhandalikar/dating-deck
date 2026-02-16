@@ -4,6 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>The Last First Date™ - Pitch Deck</title>
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-9TV0GW90SF"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-9TV0GW90SF');
+    </script>
     
     <!-- SEO Meta Tags -->
     <meta name="description" content="Disrupting your Friday nights with actual plans and zero confusion.">
@@ -697,22 +706,148 @@ function scanForRedFlags() {
     const btn = document.getElementById('scan-btn');
     const result = document.getElementById('scan-result');
 
-    // Step 1: Loading
+    gtag('event', 'scan_red_flags');
+
     btn.disabled = true;
     btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> LOADING...';
 
     setTimeout(function() {
-        // Step 2: Scanning
         btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> SCANNING...';
 
         setTimeout(function() {
-            // Step 3: Show result
             btn.style.display = 'none';
             result.style.display = 'block';
             result.innerHTML = '<span style="color: #16a34a;"><i class="fa-solid fa-circle-check"></i> 404 ERROR: RED FLAGS NOT FOUND</span>';
+            gtag('event', 'scan_red_flags_result', { result: 'no_red_flags' });
         }, 1200);
     }, 1000);
 }
+</script>
+
+<!-- GA4 Custom Tracking -->
+<script>
+(function() {
+  // ========================================================
+  // 1. RETENTION: Session tracking via localStorage
+  // ========================================================
+  var visitCount = parseInt(localStorage.getItem('dd_visit_count') || '0', 10) + 1;
+  var firstVisitDate = localStorage.getItem('dd_first_visit');
+  var isReturning = visitCount > 1;
+
+  if (!firstVisitDate) {
+    firstVisitDate = new Date().toISOString().split('T')[0];
+    localStorage.setItem('dd_first_visit', firstVisitDate);
+  }
+  localStorage.setItem('dd_visit_count', visitCount);
+
+  gtag('set', 'user_properties', {
+    visit_count: visitCount,
+    first_visit_date: firstVisitDate,
+    is_returning: isReturning ? 'yes' : 'no'
+  });
+
+  if (isReturning) {
+    gtag('event', 'returning_visit', { visit_count: visitCount });
+  }
+
+  // ========================================================
+  // 2. USER TYPE: UTM params, device category, referrer
+  // ========================================================
+  var params = new URLSearchParams(window.location.search);
+  var utmProps = {};
+  ['utm_source', 'utm_medium', 'utm_campaign'].forEach(function(key) {
+    var val = params.get(key);
+    if (val) utmProps[key] = val;
+  });
+
+  var w = window.innerWidth;
+  var deviceCategory = w <= 768 ? 'mobile' : (w <= 1024 ? 'tablet' : 'desktop');
+
+  var referrerDomain = '';
+  if (document.referrer) {
+    try { referrerDomain = new URL(document.referrer).hostname; } catch(e) {}
+  }
+
+  utmProps.device_category = deviceCategory;
+  utmProps.referrer_domain = referrerDomain || '(direct)';
+  gtag('set', 'user_properties', utmProps);
+
+  // ========================================================
+  // 3. ENGAGEMENT: Slide visibility via IntersectionObserver
+  // ========================================================
+  var viewedSlides = {};
+  var slideObserver = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        var el = entry.target;
+        var id = el.id;
+        if (viewedSlides[id]) return;
+        viewedSlides[id] = true;
+
+        var num = parseInt(id.replace('slide', ''), 10);
+        var heading = el.querySelector('h1, h2');
+        var title = heading ? heading.textContent.trim().substring(0, 60) : id;
+
+        gtag('event', 'slide_view', {
+          slide_id: id,
+          slide_number: num,
+          slide_title: title
+        });
+      }
+    });
+  }, { threshold: 0.5 });
+
+  document.querySelectorAll('.slide-container').forEach(function(slide) {
+    slideObserver.observe(slide);
+  });
+
+  // ========================================================
+  // 4. ENGAGEMENT: Scroll depth milestones
+  // ========================================================
+  var milestonesFired = {};
+  var milestones = [25, 50, 75, 100];
+
+  window.addEventListener('scroll', function() {
+    var scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+    var docHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    if (docHeight <= 0) return;
+    var percent = Math.round((scrollTop / docHeight) * 100);
+
+    milestones.forEach(function(m) {
+      if (percent >= m && !milestonesFired[m]) {
+        milestonesFired[m] = true;
+        gtag('event', 'scroll_milestone', { percent: m });
+      }
+    });
+  }, { passive: true });
+
+  // ========================================================
+  // 5. ENGAGEMENT: CTA click tracking
+  // ========================================================
+  var askBtn = document.querySelector('.ask-button');
+  if (askBtn) {
+    askBtn.addEventListener('click', function() {
+      gtag('event', 'cta_click', { cta_type: 'text_me_maybe' });
+    });
+  }
+
+  var igLink = document.querySelector('#slide7 a[href*="instagram"]');
+  if (igLink) {
+    igLink.addEventListener('click', function() {
+      gtag('event', 'cta_click', { cta_type: 'instagram_link' });
+    });
+  }
+
+  // ========================================================
+  // 6. ENGAGEMENT: Engaged time checkpoints
+  // ========================================================
+  [30, 60, 120, 300].forEach(function(sec) {
+    setTimeout(function() {
+      gtag('event', 'engaged_time', { seconds: sec });
+    }, sec * 1000);
+  });
+
+})();
 </script>
 
 <!-- Live Stock Ticker -->
