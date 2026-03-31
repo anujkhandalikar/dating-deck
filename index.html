@@ -44,35 +44,21 @@
 
     body {
       background-color: #f3f4f6;
-      display: grid;
-      gap: 20px;
-      grid-template-columns: 1fr;
       margin: 0;
       min-height: 100vh;
-      padding: 20px 0 60px 0;
-      place-items: center;
+      padding: 0 0 40px 0; /* keep space for ticker */
     }
 
     .slide-container {
-      align-items: center;
-      background-color: #ffffff;
-      border-radius: 0;
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-      display: flex;
-      flex-direction: column;
-      font-family: 'Inter', sans-serif;
-      /* RESCALED DIMENSIONS (Zoomed out) */
-      height: 576px;
-      width: 1024px;
-      justify-content: center;
-      overflow: hidden;
-      padding: 40px;
-      /* Reduced padding */
+      width: 100vw;
+      height: 100vh;
       position: relative;
+      overflow: hidden;
+      background-color: #ffffff;
     }
 
     /* Asset Serial Number */
-    .slide-container::after {
+    .slide-inner::after {
       content: '#IITM-FPM-001 // CLASSIFIED';
       position: absolute;
       bottom: 15px;
@@ -83,10 +69,31 @@
       opacity: 0.6;
     }
 
+    .slide-inner {
+      --deck-scale: 1;
+      width: 1024px;
+      height: 576px;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) scale(var(--deck-scale));
+      transform-origin: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 40px;
+      font-family: 'Inter', sans-serif;
+      background-color: #ffffff;
+      border-radius: 0;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+    }
+
     /* 2. TYPOGRAPHY (Scaled Down) */
-    .slide-container h1,
-    .slide-container h2,
-    .slide-container h3 {
+    .slide-inner h1,
+    .slide-inner h2,
+    .slide-inner h3 {
       color: #000000;
       font-weight: 800;
       letter-spacing: -0.04em;
@@ -94,9 +101,9 @@
       text-transform: uppercase;
     }
 
-    .slide-container p,
-    .slide-container li,
-    .slide-container .subtitle {
+    .slide-inner p,
+    .slide-inner li,
+    .slide-inner .subtitle {
       color: #1f2937;
       font-family: 'Inter', sans-serif;
       font-weight: 400;
@@ -116,13 +123,13 @@
       color: #dc2626;
     }
 
-    .slide-container h1 {
+    .slide-inner h1 {
       font-size: 72px;
       /* Was 90px */
       line-height: 0.9;
     }
 
-    .slide-container .slide-title {
+    .slide-inner .slide-title {
       font-size: 36px;
       /* Was 48px */
       margin-bottom: 30px;
@@ -135,13 +142,13 @@
       align-items: flex-end;
     }
 
-    .slide-container h3 {
+    .slide-inner h3 {
       font-size: 22px;
       /* Was 28px */
       margin-bottom: 8px;
     }
 
-    .slide-container p,
+    .slide-inner p,
     li {
       font-size: 16px;
       /* Was 20px */
@@ -635,6 +642,7 @@
 
   <!-- Slide 1: The Hook -->
   <div class="slide-container" id="slide1">
+    <div class="slide-inner">
     <div class="title-layout">
       <div
         style="position: absolute; top: -30px; right: 0; display: flex; flex-direction: column; align-items: center; transform: rotate(15deg); z-index: 10;">
@@ -648,10 +656,12 @@
         <p>Confidential • <span class="marker-text">For Your Eyes Only</span></p>
       </div>
     </div>
+    </div>
   </div>
 
   <!-- Slide 2: The Problem -->
   <div class="slide-container" id="slide2">
+    <div class="slide-inner">
     <h2 class="slide-title" style="justify-content: flex-start; gap: 8px;">The Current Market is <span
         class="marker-text" style="font-size: 32px; color: #dc2626;">TRASH</span></h2>
     <div class="content-area">
@@ -733,10 +743,12 @@
         </div>
       </div>
     </div>
+    </div>
   </div>
 
   <!-- Slide 3: The Solution -->
   <div class="slide-container" id="slide3">
+    <div class="slide-inner">
     <h2 class="slide-title">The Pivot: ANUJ 3.0 <span
         style="font-size: 16px; color: #9ca3af; vertical-align: middle; margin-left: 10px;">(Stable Release)</span></h2>
     <div class="content-area">
@@ -774,10 +786,12 @@
         </div>
       </div>
     </div>
+    </div>
   </div>
 
   <!-- Slide 4: Metrics -->
   <div class="slide-container" id="slide4">
+    <div class="slide-inner">
     <h2 class="slide-title">Key Performance Indicators</h2>
     <div class="content-area">
       <div class="tiled-content">
@@ -804,10 +818,12 @@
         </div>
       </div>
     </div>
+    </div>
   </div>
 
   <!-- Slide 5: Roadmap -->
   <div class="slide-container" id="slide5">
+    <div class="slide-inner">
     <h2 class="slide-title">The Roadmap <span class="marker-text"
         style="font-size: 20px; margin-left: 10px; color: #dc2626;">(Aggressive Timeline)</span></h2>
     <div class="content-area">
@@ -834,10 +850,12 @@
         </div>
       </div>
     </div>
+    </div>
   </div>
 
   <!-- Slide 6: Social Proof -->
   <div class="slide-container" id="slide6">
+    <div class="slide-inner">
     <h2 class="slide-title">User Reviews</h2>
     <div class="content-area">
       <div class="quote-layout">
@@ -850,11 +868,13 @@
         <div style="margin-top: 25px; opacity: 0.5; font-size: 12px;">(Verified Purchase)</div>
       </div>
     </div>
+    </div>
   </div>
 
   <!-- Slide 7: The Ask -->
   <!-- Slide 7: Ideal Date Profile (Safina Spec) -->
   <div class="slide-container" id="slide7">
+    <div class="slide-inner">
     <h2 class="slide-title">IDEAL DATE PROFILE <span class="marker-text highlight-red"
         style="font-size: 18px; margin-left: 12px; transform: rotate(2deg);">(THE "SAFINA" SPEC)</span></h2>
     <div class="content-area" style="position: relative;">
@@ -887,10 +907,12 @@
         </div>
       </div>
     </div>
+    </div>
   </div>
 
   <!-- Slide 8: The Ask -->
   <div class="slide-container" id="slide8">
+    <div class="slide-inner">
     <div class="title-layout" style="text-align: center;">
       <h1 style="font-size: 60px;">Ready to <span class="highlight-red">Invest?</span></h1>
       <p style="font-size: 20px; color: #4b5563; max-width: 700px; margin: 20px auto;">Limited partner slots available.
@@ -903,7 +925,25 @@
           href="https://instagram.com/anuj.khandalikar" target="_blank"
           style="color: inherit; text-decoration: none;">@anuj.khandalikar</a></p>
     </div>
+    </div>
   </div>
+
+  <script>
+    (function () {
+      function resizeDeck() {
+        document.querySelectorAll('.slide-container').forEach(function (slide) {
+          var inner = slide.querySelector('.slide-inner');
+          if (!inner) return;
+          var scale = Math.min(slide.clientWidth / 1024, slide.clientHeight / 576);
+          inner.style.setProperty('--deck-scale', String(scale));
+        });
+      }
+
+      window.addEventListener('resize', resizeDeck);
+      window.addEventListener('load', resizeDeck);
+      resizeDeck();
+    })();
+  </script>
 
   <script>
     function scanForRedFlags() {
