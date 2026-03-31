@@ -1145,8 +1145,15 @@
       <p style="font-size: 20px; color: #4b5563; max-width: 700px; margin: 20px auto;">Limited partner slots available.
         </br>Terms and conditions apply (I steal the blankets).</p>
 
-      <div class="ask-button">
-        TEXT ME MAYBE <i class="fa-solid fa-comment-sms" style="margin-left: 10px;"></i>
+      <a class="ask-button"
+        href="https://wa.me/919834507609?text=Lets%20make%20a%20deal!"
+        target="_blank"
+        rel="noopener noreferrer"
+        style="text-decoration: none; display: inline-block;">
+        TEXT ME MAYBE <i class="fa-brands fa-whatsapp" style="margin-left: 10px;"></i>
+      </a>
+      <div style="margin-top: 12px; font-family: 'JetBrains Mono', monospace; font-size: 14px; color: #4b5563;">
+        WhatsApp: <span style="font-weight: 700; color: #111;">+91 98345 07609</span>
       </div>
       <p style="margin-top: 25px; font-family: 'JetBrains Mono', monospace; font-size: 16px;"><a
           href="https://instagram.com/anuj.khandalikar" target="_blank"
@@ -1301,7 +1308,7 @@
       var askBtn = document.querySelector('.ask-button');
       if (askBtn) {
         askBtn.addEventListener('click', function () {
-          gtag('event', 'cta_click', { cta_type: 'text_me_maybe' });
+          gtag('event', 'cta_click', { cta_type: 'whatsapp' });
         });
       }
 
