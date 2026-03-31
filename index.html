@@ -46,7 +46,7 @@
       background-color: #f3f4f6;
       margin: 0;
       min-height: 100vh;
-      padding: 0 0 40px 0; /* keep space for ticker */
+      padding: 0 0 calc(40px + env(safe-area-inset-bottom, 0px)) 0; /* keep space for ticker */
     }
 
     .slide-container {
@@ -635,6 +635,233 @@
         transform: translate3d(-100%, 0, 0);
       }
     }
+
+    /* =========================================================
+       MOBILE MODE
+       - Stop scaling a fixed 1024x576 canvas
+       - Reflow into a readable, single-column layout
+       ========================================================= */
+    @media (max-width: 768px) {
+      body {
+        background-color: #ffffff;
+      }
+
+      .slide-container {
+        height: auto;
+        overflow: visible;
+        background-color: #ffffff;
+        padding: 18px 0 28px 0;
+      }
+
+      .slide-inner {
+        width: 100%;
+        height: auto;
+        position: relative;
+        top: auto;
+        left: auto;
+        transform: none;
+        transform-origin: initial;
+        padding: 20px 16px;
+        box-shadow: none;
+      }
+
+      .slide-inner::after {
+        position: relative;
+        bottom: auto;
+        right: auto;
+        display: block;
+        width: 100%;
+        margin-top: 18px;
+        text-align: right;
+      }
+
+      .content-area {
+        justify-content: flex-start;
+        flex-grow: 0;
+      }
+
+      .slide-inner h1 {
+        font-size: clamp(36px, 9vw, 52px);
+        line-height: 0.95;
+      }
+
+      .slide-inner .slide-title {
+        font-size: clamp(22px, 5.6vw, 30px);
+        margin-bottom: 18px;
+        padding-bottom: 10px;
+        border-bottom-width: 3px;
+        gap: 10px;
+        flex-wrap: wrap;
+      }
+
+      .slide-inner h3 {
+        font-size: clamp(16px, 4.6vw, 20px);
+      }
+
+      .slide-inner p,
+      .slide-inner li {
+        font-size: 16px;
+      }
+
+      .title-layout {
+        padding-top: 6px;
+      }
+
+      .title-layout .subtitle {
+        font-size: 14px;
+        padding-left: 12px;
+      }
+
+      .sticker {
+        font-size: 16px;
+        padding: 8px 14px;
+      }
+
+      .two-column,
+      .spec-two-column,
+      .tiled-content {
+        grid-template-columns: 1fr;
+        gap: 18px;
+        height: auto;
+        align-items: stretch;
+      }
+
+      .image-wrapper {
+        height: clamp(220px, 52vw, 320px);
+      }
+
+      .rounded-image-layout .image-wrapper {
+        height: min(260px, 70vw);
+        width: min(260px, 70vw);
+      }
+
+      .image-tile .image-wrapper {
+        height: clamp(200px, 48vw, 260px);
+      }
+
+      .timeline-layout {
+        flex-direction: column;
+        gap: 18px;
+        margin-top: 18px;
+      }
+
+      .timeline-layout::before,
+      .timeline-layout::after {
+        display: none;
+      }
+
+      .timeline-item {
+        width: 100%;
+        text-align: left;
+        padding-top: 0;
+        padding-left: 54px;
+        padding-bottom: 10px;
+      }
+
+      .timeline-item::before {
+        left: 22px;
+        transform: none;
+        top: 18px;
+      }
+
+      .timeline-item .icon-circle {
+        left: 0;
+        transform: none;
+        top: 0;
+      }
+
+      .quote-layout {
+        width: 100%;
+      }
+
+      .quote-layout blockquote {
+        font-size: clamp(24px, 6.5vw, 34px);
+      }
+
+      .ask-button {
+        width: 100%;
+        max-width: 420px;
+        text-align: center;
+        padding: 16px 18px;
+        min-height: 48px;
+      }
+
+      #scan-btn {
+        min-height: 44px;
+        padding: 12px 16px;
+      }
+
+      /* Replace hover-only interactions with tap-friendly feedback */
+      .slide-container:hover .image-wrapper img {
+        transform: none;
+      }
+
+      .ask-button:hover {
+        transform: none;
+        box-shadow: 6px 6px 0px #dc2626;
+      }
+
+      .ask-button:active {
+        transform: translate(2px, 2px);
+        box-shadow: 4px 4px 0px #dc2626;
+      }
+
+      #scan-btn:active {
+        transform: translate(1px, 1px);
+      }
+
+      .ticker-wrap {
+        height: 44px;
+        padding-bottom: env(safe-area-inset-bottom, 0px);
+      }
+
+      .ticker {
+        height: 44px;
+        line-height: 44px;
+      }
+
+      .ticker__item {
+        font-size: 14px;
+        padding: 0 1.25rem;
+      }
+
+      /* Slide 1: un-float the sticker/photo cluster */
+      #slide1 .title-layout > div {
+        position: static !important;
+        transform: none !important;
+        margin: 0 0 14px 0;
+        align-items: flex-start !important;
+      }
+
+      #slide1 .title-layout > div img {
+        width: min(220px, 62vw) !important;
+        height: min(220px, 62vw) !important;
+      }
+
+      /* Slide 7 (Safina): reduce cram by making overlays flow */
+      #slide7 .spec-frame {
+        height: clamp(240px, 56vw, 300px);
+      }
+
+      #slide7 .spec-banner {
+        position: static;
+        transform: none;
+        display: inline-block;
+        margin: 10px 0 0 auto;
+      }
+
+      #slide7 .spec-note {
+        position: static;
+        transform: none;
+        margin-top: 12px;
+        font-size: 14px;
+        padding: 12px 12px;
+      }
+
+      #slide7 .spec-note::before {
+        display: none;
+      }
+    }
   </style>
 </head>
 
@@ -931,6 +1158,9 @@
   <script>
     (function () {
       function resizeDeck() {
+        if (window.matchMedia && window.matchMedia('(max-width: 768px)').matches) {
+          return;
+        }
         document.querySelectorAll('.slide-container').forEach(function (slide) {
           var inner = slide.querySelector('.slide-inner');
           if (!inner) return;
